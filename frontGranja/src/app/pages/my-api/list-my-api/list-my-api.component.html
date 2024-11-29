@@ -1,0 +1,81 @@
+<!-- Hero Section -->
+<div class="container-fluid bg- text-black py-5">
+  <div class="container">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <div class="col-lg-6 text-center">
+        <img src="https://scalashopping.com/wp-content/uploads/2018/08/logo-Fybeca-01.png" alt="..."
+          class="img-fluid rounded">
+      </div>
+      <div class="col-lg-12 text-center">
+        <p class="lead mb-4">En Fybeca, nos dedicamos a cuidar de ti y de los tuyos, ofreciéndote productos de calidad,
+          atención personalizada y un compromiso inquebrantable con tu bienestar. Somos más que una farmacia; somos tu
+          aliado en salud, siempre cerca de ti cuando más nos necesitas.</p>
+        <div class="d-flex gap-3"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row mb-2">
+    <div class="col text-center">
+      <h2 class="">Registro de trabajadores</h2>
+    </div>
+  </div>
+
+  <!-- Campo de búsqueda -->
+  <div class="row mb-4">
+    <div class="col-md-6 mx-auto">
+      <div class="input-group">
+        <input type="text" class="form-control" [(ngModel)]="searchTerm"
+          placeholder="Buscar trabajador por nombre o ID..." (keyup.enter)="onSearch()" />
+        <button class="btn btn-warning" type="button" (click)="onSearch()">
+          <i class="fas fa-search"></i> Buscar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex align-items-center mb-3">
+    <button class="btn btn-warning" routerLink="/miapi/create">
+      Agregar nuevo trabajador
+    </button>
+  </div>
+
+  <!-- Tabla de resultados -->
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">Puesto</th>
+        <th scope="col">Horario</th>
+        <th scope="col">Salario</th>
+        <th scope="col">Teléfono de Contacto</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let trabajador of searchResults; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ trabajador.nombre }}</td>
+        <td>{{ trabajador.apellido }}</td>
+        <td>{{ trabajador.puesto }}</td>
+        <td>{{ trabajador.horario }}</td>
+        <td>{{ trabajador.salario }}$</td>
+        <td>{{ trabajador.telefono_contacto }}</td>
+        <td>
+          <!-- Botón de Eliminar -->
+          <button class="btn btn-danger btn-sm me-2" (click)="eliminarTrabajador(trabajador._id)">
+            Eliminar
+          </button>
+          <!-- Botón de Actualizar -->
+          <button class="btn btn-primary btn-sm" [routerLink]="['/miapi/update', trabajador._id]">
+            Editar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
